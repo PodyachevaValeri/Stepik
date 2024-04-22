@@ -1,0 +1,59 @@
+import random
+print('Добро пожаловать в числовую угадайку!') 
+
+def lucky_num():
+    print('Поиск будет в диапозоне от 1 до грницы n, поэтому введите границу поиска:')    
+    b = input()
+    if is_check(b) == False:
+        print('А может быть все-таки введем целое число от 1 до 100?')
+        return lucky_num()
+    else:
+        num = random.randint(1,int(b))
+    return num
+
+def game():
+    num = lucky_num()
+    if num == False:
+        return lucky_num()
+    else:
+        print('Да начнется игра! \nВведите загаданное число! ')    
+        n = input()
+        c = 0 
+        if is_check(n) == False:
+            print('А может быть все-таки введем целое число от 1 до 100?')
+            return game()
+        else:
+            while True: 
+                    if int(n) < num:
+                        c += 1
+                        print('Ваше число меньше загаданного, попробуйте еще разок')
+                        n = input()
+                        continue
+                    elif int(n)> num:
+                        c += 1
+                        print('Ваше число больше загаданного, попробуйте еще разок') 
+                        n = input()
+                        continue
+                    else:
+                        c += 1
+                        print('Вы угадали, поздравляем!')
+                        print('Число попыток:', c)
+                        break 
+    
+    print('Еще сыграете? \nЕсли да - "да/yes "\nнет - "нет/no"')
+    ans = input()
+    if ans in 'no, нет':
+        print('Спасибо, что играли в числовую угадайку.')
+    elif ans in 'да, yes':
+            return game()
+    else:
+        print("Спасибо за игру и до свидания!")
+
+
+def is_check(number):
+    if number.isdigit()  and 1<= int(number) <=100:
+        return True 
+    else:
+        return False
+
+game()
